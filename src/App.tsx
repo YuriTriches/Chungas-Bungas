@@ -732,16 +732,20 @@ const MemberCard = ({ m, delay }) => {
         borderRadius:"20px 20px 0 0",
         position:"relative", transition:"border-color .35s", zIndex:1,
       }}>
-        <img
-          src={m.photo}
-          alt={m.full}
-          className="member-photo"
-          style={{ filter: hov ? "none" : "grayscale(30%)" }}
-          onError={e=>{
-            e.target.style.display="none";
-            e.target.nextSibling.style.display="flex";
-          }}
-        />
+    <img
+  src={m.photo}
+  alt={m.full}
+  className="member-photo"
+  style={{ filter: hov ? "none" : "grayscale(30%)" }}
+  onError={(e) => {
+    const target = e.target as HTMLImageElement;
+    target.style.display = "none";
+    const next = target.nextSibling as HTMLElement;
+    if (next) {
+      next.style.display = "flex";
+    }
+  }}
+/>
         {/* fallback emoji */}
         <div style={{
           display:"none", width:"100%", height:"100%",
